@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="styles1.css"> 
+    <title>SORRY</title>
+    
+</head>
+<body>
+    <div class="emoji-bg">🥺</div>
+    <div class="emoji-bg">🥺</div>
+    <div class="emoji-bg">🥺</div>
+    <div class="emoji-bg">🥺</div>
+    <div class="emoji-bg">🥺</div>
+    
+    <div class="container">
+        <h1>IS AFRAH GHAZI UNFUNNY? 🥺</h1>
+        <button class="apology-btn">LETS FIND OUT </button>
+        
+        <div class="question-container">
+            <div class="question">Afrah Ghazi is funny or unfunny? 🥺</div>
+            <input type="text" class="answer-input" placeholder="Type your answer...">
+            <button class="submit-btn">Submit 🥺</button>
+        </div>
+   
+        <div class="result">KYS TWIN</div>
+    </div>
+    
+    <div class="image-container">
+        <button class="close-btn">×</button>
+        <img src="haha.jpg" alt="Apology Image" class="apology-image">
+        <div class="emojis">
+            <span>🥺</span>
+            <span>🥺</span>
+            <span>🥺</span>
+            <span>🥺</span>
+            <span>🥺</span>
+        </div>
+    </div>
+    <div class="video-overlay" id="videoOverlay">
+  <button class="close-video-btn" id="closeVideoBtn">×</button>
+  <video id="funnyVid" autoplay playsinline>
+    <source src="arpit.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+
+
+    <script>
+    const apologyBtn = document.querySelector('.apology-btn');
+    const questionContainer = document.querySelector('.question-container');
+    const answerInput = document.querySelector('.answer-input');
+    const submitBtn = document.querySelector('.submit-btn');
+    const result = document.querySelector('.result');
+    const imageContainer = document.querySelector('.image-container');
+    const closeBtn = document.querySelector('.close-btn');
+    const container = document.querySelector('.container');
+
+    const videoOverlay = document.getElementById('videoOverlay');
+    const funnyVid = document.getElementById('funnyVid');
+    const closeVideoBtn = document.getElementById('closeVideoBtn');
+
+    // Show input section
+    apologyBtn.addEventListener('click', () => {
+        questionContainer.classList.add('show');
+        apologyBtn.textContent = "SORRY 🥺";
+        apologyBtn.style.background = "linear-gradient(135deg, #555, #777)";
+        apologyBtn.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.2)";
+        apologyBtn.style.transform = "scale(0.95)";
+        result.classList.remove('show');
+    });
+
+    submitBtn.addEventListener('click', checkAnswer);
+    answerInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') checkAnswer();
+    });
+
+    answerInput.addEventListener('input', () => {
+        result.classList.remove('show');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        imageContainer.classList.remove('show');
+    });
+
+    closeVideoBtn.addEventListener('click', () => {
+        funnyVid.pause();
+        funnyVid.currentTime = 0;
+        videoOverlay.style.display = "none";
+        questionContainer.classList.add('show');
+        answerInput.value = '';
+        answerInput.focus();
+    });
+
+    function checkAnswer() {
+        const answer = answerInput.value.trim().toLowerCase();
+
+        // Hide everything by default
+        imageContainer.classList.remove('show');
+        videoOverlay.style.display = "none";
+        funnyVid.pause();
+        funnyVid.currentTime = 0;
+        result.classList.remove('show');
+
+        if (answer === 'funny') {
+            // Show image only
+            imageContainer.classList.add('show');
+        } else if (answer === 'unfunny') {
+            // Show KYS + video
+            result.classList.add('show');
+            videoOverlay.style.display = "flex";
+            funnyVid.muted = false;
+            funnyVid.play();
+        } else {
+            // Just KYS
+            result.classList.add('show');
+        }
+
+        questionContainer.classList.remove('show');
+
+        if (answer !== 'funny') {
+            container.classList.add('shake');
+            document.body.style.background = "#400000";
+            setTimeout(() => {
+                document.body.style.background = "var(--bg)";
+                container.classList.remove('shake');
+            }, 500);
+        }
+    }
+</script>
+
+</body>
+</html>
